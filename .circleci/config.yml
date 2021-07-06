@@ -41,8 +41,11 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: coverage run -m pytest -v --junitxml=tests-results/report.xml
+          command: |
+            coverage run --source=. -m pytest -v --junit-xml=test-results/pytest/result.xml
+            coverage report
+            coverage html -d coverage
       - store_test_results:
-          path: tests-results/
-#      - store_artifacts:
-#          path: tests-results/
+          path: test-results/pytest
+      - store_artifacts:
+          path: coverage
