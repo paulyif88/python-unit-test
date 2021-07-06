@@ -41,6 +41,7 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: pytest
+          command: pytest -v --junitxml=tests/report.xml
       - store_test_results:
-          path: integration-tests/test-results
+          path: tests/report.xml
+          destination: integration-tests/test-results
